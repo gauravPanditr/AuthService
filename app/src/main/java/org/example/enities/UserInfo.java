@@ -1,19 +1,37 @@
 package org.example.enities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
+@Table(name = "users")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfo {
+
+    @Id
+    @Column(name = "user_id")
+    private String userId;
+
+    private String username;
+
+    private String password;
+
+
+
+
+
+
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -23,8 +41,6 @@ public class UserInfo {
     )
 
     private Set<UserRole> roles = new HashSet<>();
-
-
 
 
 
