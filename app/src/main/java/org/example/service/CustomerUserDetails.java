@@ -17,7 +17,7 @@ public class CustomerUserDetails extends UserInfo implements UserDetails {
     Collection<? extends GrantedAuthority> authorities;
 
     public CustomerUserDetails(UserInfo byUsername) {
-        this.username = byUsername
+        this.username = byUsername.getUsername();
         this.password= byUsername.getPassword();
         List<GrantedAuthority> auths = new ArrayList<>();
 
