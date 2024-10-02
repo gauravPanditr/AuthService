@@ -4,6 +4,7 @@ package org.example.service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.example.enities.UserInfo;
+import org.example.model.UserInfoDto;
 import org.example.repositary.UserRepositary;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.UUID;
 
 @Component
 @Data
@@ -35,8 +40,24 @@ public class UserDetailsServiceImp implements UserDetailsService {
         }
     return  new CustomerUserDetails(user);
 
-
-
-
     }
+    private UserInfo checkUserExist(UserInfoDto userInfoDto){
+         return userRepositary.findByUsername(userInfoDto.getUsername());
+    }
+
+    public Boolean SignUpUser(UserInfoDto userInfoDto){
+        userInfoDto.setPassword(passwordEncoder.encode(userInfoDto.getPassword()));
+        if(Objects.nonNull(checkUserExist(userInfoDto))){
+            return false;
+        }
+        String userId= UUID.randomUUID().toString();
+        userRepositary.save(new UserInfo(userId,userInfoDto.getUsername(),userInfoDto.getPassword(),new HashSet<>()));
+      return  true;
+    }
+
+
+
+
+
+
 }

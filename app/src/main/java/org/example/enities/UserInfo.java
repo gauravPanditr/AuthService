@@ -28,11 +28,6 @@ public class UserInfo {
 
 
 
-
-
-
-
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
