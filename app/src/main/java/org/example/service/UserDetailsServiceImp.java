@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import org.example.enities.UserInfo;
+import org.example.eventProducer.UserInfoProducer;
 import org.example.model.UserInfoDto;
 import org.example.repositary.UserRepositary;
 import org.example.utilies.*;
@@ -30,7 +31,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-
+    @Autowired
+    private final UserInfoProducer userInfoProducer;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -87,6 +89,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
         }
         String userId= UUID.randomUUID().toString();
         userRepositary.save(new UserInfo(userId,userInfoDto.getUsername(),userInfoDto.getPassword(),new HashSet<>()));
+        //publish Event to kafka
+        userInfoProducer.sendEventToKafka(userInfoDto);
       return  userId;
     }
 

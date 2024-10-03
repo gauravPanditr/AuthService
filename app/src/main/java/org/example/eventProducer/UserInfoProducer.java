@@ -1,12 +1,13 @@
 package org.example.eventProducer;
 
-import io.jsonwebtoken.security.Message;
+
 import org.example.model.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserInfoProducer {
 
 
-    private final KafkaTemplate<String,UserInfoProducer>kafkaTemplate;
+    private final KafkaTemplate<String, UserInfoDto> kafkaTemplate;
 
     @Value("${spring.kafka.topic.name}")
     private String TOPIC_NAME;
@@ -25,9 +26,9 @@ public class UserInfoProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendEventToKafka(UserInfoEvent eventData) {
-        Message<UserInfoEvent> message = MessageBuilder.withPayload(eventData)
-                .setHeader(KafkaHeaders.TOPIC, topicJsonName).build();
+    public void sendEventToKafka(UserInfoDto eventData) {
+        Message<UserInfoDto> message = MessageBuilder.withPayload(eventData)
+                .setHeader(KafkaHeaders.TOPIC, TOPIC_NAME).build();
         kafkaTemplate.send(message);
     }
 
