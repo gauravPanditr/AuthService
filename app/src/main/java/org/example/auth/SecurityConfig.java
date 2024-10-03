@@ -40,11 +40,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,JwtAuthFilter jwtAuthFilter)throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JwtAuthFilter jwtAuthFilter)throws Exception{
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable).cors(CorsConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/login","/api/v1/refreshToken","api/v1/signUp").permitAll()
+                        .requestMatchers("/auth/api/v1/login","/auth/api/v1/refreshToken","/auth/api/v1/signup").permitAll()
                         .anyRequest()
                         .authenticated()
                 )

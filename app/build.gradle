@@ -59,6 +59,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.modelmapper:modelmapper:3.2.0'
+    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '8.0.1.Final'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
     implementation group: 'org.projectlombok', name:'lombok', version: "$lombokVersion"
     compileOnly group: 'org.projectlombok', name:'lombok', version: "$lombokVersion"
