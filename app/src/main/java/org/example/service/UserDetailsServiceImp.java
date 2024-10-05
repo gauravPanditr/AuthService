@@ -32,7 +32,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private final UserInfoProducer userInfoProducer;
+   private final UserInfoProducer userInfoProducer;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -49,39 +49,39 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
 
     public String SignUpUser(UserInfoDto userInfoDto){
-        FirstNameValidator firstNameValidator = new FirstNameValidator();
-        if (!firstNameValidator.isValid(userInfoDto.getFirstName())) {
-            return "Invalid first name";
-        }
+//        FirstNameValidator firstNameValidator = new FirstNameValidator();
+//        if (!firstNameValidator.isValid(userInfoDto.getFirstName())) {
+//            return "Invalid first name";
+//        }
 
 
-        LastNameValidator lastNameValidator = new LastNameValidator();
-        if (!lastNameValidator.isValid(userInfoDto.getLastName())) {
-            return "Invalid last name";
-        }
-
-
-        PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator();
-        if (!phoneNumberValidator.isValid(userInfoDto.getPhoneNumber())) {
-            return "Invalid phone number";
-        }
-
-        // Validate email
-        EmailValidator emailValidator = new EmailValidator();
-        if (!emailValidator.isValid(userInfoDto.getEmail())) {
-            return "Invalid email address";
-        }
+//        LastNameValidator lastNameValidator = new LastNameValidator();
+//        if (!lastNameValidator.isValid(userInfoDto.getLastName())) {
+//            return "Invalid last name";
+//        }
+//
+//
+//        PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator();
+//        if (!phoneNumberValidator.isValid(userInfoDto.getPhoneNumber())) {
+//            return "Invalid phone number";
+//        }
+//
+//        // Validate email
+//        EmailValidator emailValidator = new EmailValidator();
+//        if (!emailValidator.isValid(userInfoDto.getEmail())) {
+//            return "Invalid email address";
+//        }
 
         // Validate password
-        PasswordValidator passwordValidator = new PasswordValidator();
-        if (!passwordValidator.isValid(userInfoDto.getPassword())) {
-            return "Invalid password";
-        }
-
-        UsernameValidator usernameValidator=new UsernameValidator();
-        if(!usernameValidator.isValid(userInfoDto.getUsername())){
-            return "Inavlid Username";
-        }
+//        PasswordValidator passwordValidator = new PasswordValidator();
+//        if (!passwordValidator.isValid(userInfoDto.getPassword())) {
+//            return "Invalid password";
+//        }
+//
+//        UsernameValidator usernameValidator=new UsernameValidator();
+//        if(!usernameValidator.isValid(userInfoDto.getUsername())){
+//            return "Inavlid Username";
+//        }
 
         userInfoDto.setPassword(passwordEncoder.encode(userInfoDto.getPassword()));
         if(Objects.nonNull(checkUserExist(userInfoDto))){
