@@ -11,9 +11,11 @@ import lombok.*;
 import org.example.enities.UserInfo;
 
 @JsonNaming (PropertyNamingStrategy.SnakeCaseStrategy.class)
+@Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfoDto extends UserInfo {
@@ -27,7 +29,7 @@ public class UserInfoDto extends UserInfo {
 
     @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^\\d{10}$", message = "Phone number must be 10 digits")
-    private String phoneNumber;
+    private Long phoneNumber;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
