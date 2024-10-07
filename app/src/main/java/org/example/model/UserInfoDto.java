@@ -11,10 +11,11 @@ import lombok.*;
 import org.example.enities.UserInfo;
 
 @JsonNaming (PropertyNamingStrategy.SnakeCaseStrategy.class)
+@Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 @Getter
 @Setter
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfoDto extends UserInfo {
