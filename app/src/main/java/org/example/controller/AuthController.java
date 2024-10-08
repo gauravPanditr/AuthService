@@ -35,6 +35,7 @@ public class AuthController
     @PostMapping("/signup")
     public ResponseEntity SignUp(@RequestBody UserInfoDto userInfoDto){
         try{
+            System.out.println("Received SignUp Data: " + userInfoDto);
             String userId = userDetailsService.SignUpUser(userInfoDto);
             if(Objects.isNull(userId)){
                 return new ResponseEntity<>("Already Exist", HttpStatus.BAD_REQUEST);

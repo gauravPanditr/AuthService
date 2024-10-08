@@ -12,7 +12,7 @@ public class UserInfoSerializer implements Serializer<UserInfoEvent> {
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        Serializer.super.configure(configs, isKey);
+
     }
 
     @Override
@@ -27,13 +27,10 @@ public class UserInfoSerializer implements Serializer<UserInfoEvent> {
         return retVal;
     }
 
-    @Override
-    public byte[] serialize(String topic, Headers headers, UserInfoEvent data) {
-        return Serializer.super.serialize(topic, headers, data);
-    }
+
 
     @Override
     public void close() {
-        Serializer.super.close();
+
     }
 }
